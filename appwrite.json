@@ -1,0 +1,29 @@
+{
+    "projectId": "github-edu-appwrite-stream-demo",
+    "functions": [
+        {
+            "$id": "url-shortener",
+            "name": "URL Shortener",
+            "runtime": "node-22",
+            "execute": [
+                "any"
+            ],
+            "events": [],
+            "scopes": [
+                "databases.write",
+                "databases.read",
+                "collections.write",
+                "collections.read",
+                "documents.write",
+                "documents.read"
+            ],
+            "schedule": "",
+            "timeout": 15,
+            "enabled": true,
+            "logging": true,
+            "entrypoint": "src/main.js",
+            "commands": "npm install",
+            "path": "functions/URL Shortener"
+        }
+    ]
+}

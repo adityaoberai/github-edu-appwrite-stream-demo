@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles">
+    <title>URL Shortener Demo</title>
+</head>
+<body>
+    <h1>URL Shortener</h1>
+
+    <h2>Create New Short Link</h2>
+
+    <form>
+        <div>
+            <label for="url">Full URL</label>
+            <input type="url" id="url" name="url" required>
+        </div>
+
+        <div>
+            <label for="short">Short Code</label>
+            <input type="text" id="short" name="short" minlength="3" required>
+        </div>
+
+        <button id="shortenBtn" type="submit">Shorten</button>
+    </form>
+
+    <h2>Created Short URLs</h2>
+
+    <table>
+        <tr>
+            <th>Short Link</th>
+            <th>Full URL</th>
+        </tr>
+    </table>
+</body>
+
+<script>
+    async function getShortUrls() {
+        const response = await fetch('/listUrls');
+
+        if (response.ok) {
+            const data = await response.json();
+
+            const table = document.querySelector('table');
+
+            table.innerHTML = `
+                <tr>
+                    <th>Short Link</th>
+                    <th>Full URL</th>
+                </tr>
+            `;
+
+            data.data.forEach((item) => {
+                const row = table.insertRow(-1);
+
+                const shortCell = row.insertCell(0);
+                const link = document.createElement('a');
+                link.href = `/${item.$id}`;
+                link.target = '_blank';
+                link.textContent = `/${item.$id}`;
+                shortCell.appendChild(link);
+
+                const urlCell = row.insertCell(1);
+                urlCell.textContent = item.url;
+            });
+        } else {
+            alert(`Error: ${data.error}`);
+        }
+    } getShortUrls();
+
+    document.querySelector('form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        document.querySelector('#shortenBtn').disabled = true;
+
+        const url = document.querySelector('#url').value;
+        const short = document.querySelector('#short').value;
+
+        const response = await fetch('/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ url, short })
+        });
+
+        const res = await response.json();
+
+        if (res.ok) {
+            alert(`Shortened URL: /${res.data.short}`);
+        } else {
+            alert(`Error: ${res.error}`);
+        }
+
+        document.querySelector('#shortenBtn').disabled = false;
+        document.querySelector('form').reset();
+        getShortUrls();
+    });
+</script>
+</html>
