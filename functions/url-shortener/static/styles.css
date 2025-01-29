@@ -62,7 +62,7 @@ label {
 
 input[type="url"],
 input[type="text"] {
-    width: 90%;
+    width: auto;
     padding: 0.8rem;
     font-size: 1rem;
     border: 1px solid #ccc;
@@ -91,7 +91,8 @@ button:disabled {
 }
 
 table {
-    width: 50%;
+    width: 50vw;
+    table-layout: fixed;
     margin: 2rem auto;
     border-collapse: collapse;
     background-color: #fff;
@@ -125,4 +126,59 @@ td a {
 td a:hover {
     text-decoration: underline;
     color: #0056b3;
+}
+
+@media screen and (max-width: 768px) {
+    form {
+        width: 80%;
+        padding: 2rem 0;
+    }
+
+    form div {
+        width: 80%;
+        margin: auto;
+    }
+
+    input[type="url"], input[type="text"] {
+        width: auto;
+    }
+
+    table {
+        width: 80vw;
+        margin: auto;
+        overflow-x: auto;
+        display: block;
+    }
+
+    thead, tbody {
+        display: block;
+    }
+
+    th, td {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    th {
+        background-color: #f4f4f4;
+        font-size: 1rem;
+        color: #333;
+        text-align: left;
+    }
+
+    td {
+        font-size: 0.9rem;
+        color: #555;
+        text-align: left;
+    }
+
+    td a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    td a:hover {
+        text-decoration: underline;
+        color: #0056b3;
+    }
 }

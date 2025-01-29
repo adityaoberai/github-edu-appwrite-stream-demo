@@ -51,7 +51,7 @@
                 <tr>
                     <th>Short Link</th>
                     <th>Full URL</th>
-                    <th>Copy</th>
+                    <th>Copy URL</th>
                     <th>Delete</th>
                 </tr>
             `;
@@ -71,7 +71,7 @@
 
                 const copyCell = row.insertCell(2);
                 const copyButton = document.createElement('button');
-                copyButton.textContent = 'Copy URL';
+                copyButton.textContent = 'Copy';
                 copyButton.addEventListener('click', () => {
                     navigator.clipboard.writeText(`${window.location.origin}/${item.$id}`).then(() => {
                         alert('URL copied to clipboard');
