@@ -103,7 +103,7 @@
 
         if (response.ok) {
             alert('URL deleted successfully');
-            getShortUrls();
+            await getShortUrls();
         } else {
             alert((await response.json()).error);
         }
