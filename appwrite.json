@@ -3,7 +3,7 @@
     "functions": [
         {
             "$id": "url-shortener",
-            "name": "URL Shortener",
+            "name": "url-shortener",
             "runtime": "node-22",
             "execute": [
                 "any"
@@ -24,7 +24,7 @@
             "logging": true,
             "entrypoint": "src/main.js",
             "commands": "npm install",
-            "path": "functions/URL Shortener",
+            "path": "functions/url-shortener",
             "specification": "s-1vcpu-512mb"
         }
     ]
