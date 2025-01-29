@@ -51,7 +51,8 @@
                 <tr>
                     <th>Short Link</th>
                     <th>Full URL</th>
-                    <th>Action</th>
+                    <th>Copy</th>
+                    <th>Delete</th>
                 </tr>
             `;
 
@@ -68,13 +69,25 @@
                 const urlCell = row.insertCell(1);
                 urlCell.textContent = item.url;
 
-                const actionCell = row.insertCell(2);
+                const copyCell = row.insertCell(2);
+                const copyButton = document.createElement('button');
+                copyButton.textContent = 'Copy URL';
+                copyButton.addEventListener('click', () => {
+                    navigator.clipboard.writeText(`${window.location.origin}/${item.$id}`).then(() => {
+                        alert('URL copied to clipboard');
+                    }).catch(err => {
+                        alert('Failed to copy URL');
+                    });
+                });
+                copyCell.appendChild(copyButton);
+
+                const deleteCell = row.insertCell(3);
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Delete';
                 deleteButton.addEventListener('click', async () => {
                     await deleteShortUrl(item.$id);
                 });
-                actionCell.appendChild(deleteButton);
+                deleteCell.appendChild(deleteButton);
             });
         } else {
             alert(`Error: ${data.error}`);
