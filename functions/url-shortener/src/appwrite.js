@@ -66,7 +66,7 @@ class AppwriteService {
         }
 
         try {
-            await this.databases.createStringAttribute(databaseId, collectionId, 'url', 2000, true, undefined, false, false);
+            await this.databases.createUrlAttribute(databaseId, collectionId, 'url', true, undefined, false);
         } catch (err) {
             if (err.code !== 409) throw err;
         }
