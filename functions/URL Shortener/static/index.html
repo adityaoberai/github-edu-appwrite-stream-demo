@@ -31,6 +31,7 @@
         <tr>
             <th>Short Link</th>
             <th>Full URL</th>
+            <th>Action</th>
         </tr>
     </table>
 </body>
@@ -48,6 +49,7 @@
                 <tr>
                     <th>Short Link</th>
                     <th>Full URL</th>
+                    <th>Action</th>
                 </tr>
             `;
 
@@ -63,11 +65,34 @@
 
                 const urlCell = row.insertCell(1);
                 urlCell.textContent = item.url;
+
+                const actionCell = row.insertCell(2);
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.addEventListener('click', async () => {
+                    await deleteShortUrl(item.$id);
+                });
+                actionCell.appendChild(deleteButton);
             });
         } else {
             alert(`Error: ${data.error}`);
         }
-    } getShortUrls();
+    }
+    
+    getShortUrls();
+
+    async function deleteShortUrl(short) {
+        const response = await fetch(`/${short}`, {
+            method: 'DELETE'
+        });
+
+        if (response.ok) {
+            alert('URL deleted successfully');
+            getShortUrls();
+        } else {
+            alert((await response.json()).error);
+        }
+    }
 
     document.querySelector('form').addEventListener('submit', async (e) => {
         e.preventDefault();

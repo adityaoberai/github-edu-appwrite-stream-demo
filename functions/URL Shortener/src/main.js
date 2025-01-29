@@ -2,14 +2,13 @@
 import AppwriteService from './appwrite.js';
 import { getStaticFile } from './utils.js';
 
-export default async ({ req, res, log, error }) => {
+export default async ({ req, res, error }) => {
 
   const appwriteService = new AppwriteService(req.headers['x-appwrite-key']);
 
   if(req.method === 'POST') {
 
     const output = await appwriteService.createUrlDocument(req);
-    log(`Created short URL\nShort code: ${output.data.short}\nFull URL: ${output.data.url}`);
     return res.json(output);
   }
 
@@ -45,6 +44,16 @@ export default async ({ req, res, log, error }) => {
     } catch (err) {
       error(err);
       return res.text('404 Not Found', 404);
+    }
+  }
+
+  else if(req.method === 'DELETE') {
+    const short = req.path.substring(1);
+    const output = await appwriteService.deleteUrlDocument(short);
+    if(output.ok) {
+      return res.json(output);
+    } else {
+      return res.json(output, 404);
     }
   }
 

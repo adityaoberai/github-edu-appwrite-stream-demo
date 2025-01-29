@@ -126,7 +126,7 @@ class AppwriteService {
 
     async getUrlDocument(short) {
         try {
-            const urlDocument = await this.databases.getDocument(databaseId, collectionId, short);
+            const urlDocument = await this.databases.getDocument(databaseId, collectionId, short, [Query.select(['url'])]);
             return {
                 ok: true,
                 url: urlDocument.url
