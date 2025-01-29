@@ -1,8 +1,8 @@
 import { Client, Databases, Query } from 'node-appwrite';
 import { throwIfMissing } from './utils.js';
 
-const databaseId = 'urlDb';
-const collectionId = 'urls';
+const databaseId = process.env.APPWRITE_DB_ID ?? 'urlDb';
+const collectionId = process.env.APPWRITE_COLLECTION_ID ?? 'urls';
 
 class AppwriteService {
     constructor(apiKey) {
@@ -103,6 +103,24 @@ class AppwriteService {
                 ok: false,
                 error: err.message
             }
+        }
+    }
+
+    async deleteUrlDocument(short) {
+        try {
+            if(!(await this.getUrlDocument(short)).ok) {
+                throw new Error('Short URL does not exist');
+            }
+
+            await this.databases.deleteDocument(databaseId, collectionId, short);
+            return {
+                ok: true
+            };
+        } catch (err) {
+            return {
+                ok: false,
+                error: err.message
+            };
         }
     }
 

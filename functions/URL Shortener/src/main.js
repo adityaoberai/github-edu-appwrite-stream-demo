@@ -9,6 +9,7 @@ export default async ({ req, res, log, error }) => {
   if(req.method === 'POST') {
 
     const output = await appwriteService.createUrlDocument(req);
+    log(`Created short URL\nShort code: ${output.data.short}\nFull URL: ${output.data.url}`);
     return res.json(output);
   }
 
