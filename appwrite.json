@@ -14,6 +14,7 @@
                 "databases.read",
                 "collections.write",
                 "collections.read",
+                "attributes.write",
                 "documents.write",
                 "documents.read"
             ],
@@ -23,7 +24,8 @@
             "logging": true,
             "entrypoint": "src/main.js",
             "commands": "npm install",
-            "path": "functions/URL Shortener"
+            "path": "functions/URL Shortener",
+            "specification": "s-1vcpu-512mb"
         }
     ]
 }
