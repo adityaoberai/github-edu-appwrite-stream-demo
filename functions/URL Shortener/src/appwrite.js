@@ -141,7 +141,7 @@ class AppwriteService {
 
     async getUrlList() {
         try {
-            const urlList = await this.databases.listDocuments(databaseId, collectionId, [Query.select(['$id', 'url'])]);
+            const urlList = await this.databases.listDocuments(databaseId, collectionId, [Query.select(['$id', 'url']), Query.orderDesc('$createdAt'), Query.limit(100)]);
             return {
                 ok: true,
                 data: urlList.documents
