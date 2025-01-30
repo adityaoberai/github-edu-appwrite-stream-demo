@@ -1,6 +1,6 @@
 # URL Shortener
 
-A URL shortener app that offers a landing page, creation of short links, listing of all store URLs, and copy and delete actions for all short URLs
+A URL shortener app that offers a landing page, creation of short links, listing of all store URLs, and copy and delete actions for all short URLs.
 
 ## 🧰 Usage
 
@@ -91,6 +91,7 @@ Sample `200` Response:
 | ----------------- | ------------- |
 | Runtime           | Node (22.0)   |
 | Entrypoint        | `src/main.js` |
+| Function path     | `functions/url-shortener` |
 | Build Commands    | `npm install` |
 | Permissions       | `any`         |
 | Timeout (Seconds) | 15            |
